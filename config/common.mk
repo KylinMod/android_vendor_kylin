@@ -136,6 +136,7 @@ PRODUCT_PACKAGES += \
 
 # Custom KM packages
 PRODUCT_PACKAGES += \
+    ChameleonEngine \
     KylinModLauncher
 
 # KylinMod PhoneLoc Database
