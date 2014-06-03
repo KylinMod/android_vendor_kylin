@@ -297,6 +297,9 @@ else
     KMSTATS_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)$(PRODUCT_VERSION_MAINTENANCE)
 endif
 
+# by default, do not update the recovery with system updates
+PRODUCT_PROPERTY_OVERRIDES += persist.sys.recovery_update=false
+
 PRODUCT_PROPERTY_OVERRIDES += \
   ro.km.version=$(KM_VERSION) \
   ro.modversion=$(KM_VERSION) \
