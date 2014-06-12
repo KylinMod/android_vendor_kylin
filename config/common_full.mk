@@ -23,13 +23,6 @@ PRODUCT_PACKAGES += \
     PhotoTable \
     SoundRecorder
 
-# Stagefright FFMPEG plugin
-PRODUCT_PACKAGES += \
-    libstagefright_soft_ffmpegadec \
-    libstagefright_soft_ffmpegvdec \
-    libFFmpegExtractor \
-    libnamparser
-
 # Extra tools in KM
 PRODUCT_PACKAGES += \
     vim
