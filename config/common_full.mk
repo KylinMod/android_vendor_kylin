@@ -21,7 +21,8 @@ PRODUCT_PACKAGES += \
     PhaseBeam \
     VisualizationWallpapers \
     PhotoTable \
-    SoundRecorder
+    SoundRecorder \
+    PhotoPhase
 
 # Extra tools in KM
 PRODUCT_PACKAGES += \
