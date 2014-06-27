@@ -16,6 +16,6 @@
 
 <!-- This feature shows that this is device features CM NFC enhancements -->
 <permissions>
-    <feature name="com.kylinmod.nfc.enhanced" />
+    <feature name="com.cyanogenmod.nfc.enhanced" />
 </permissions>
 

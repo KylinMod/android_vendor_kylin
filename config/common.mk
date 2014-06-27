@@ -118,7 +118,8 @@ PRODUCT_COPY_FILES += \
 
 # This is KM!
 PRODUCT_COPY_FILES += \
-    vendor/kylin/config/permissions/com.kylinmod.android.xml:system/etc/permissions/com.kylinmod.android.xml
+    vendor/kylin/config/permissions/com.kylinmod.android.xml:system/etc/permissions/com.kylinmod.android.xml \
+    vendor/kylin/config/permissions/com.cyanogenmod.android.xml:system/etc/permissions/com.cyanogenmod.android.xml
 
 # T-Mobile theme engine
 include vendor/kylin/config/themes_common.mk
@@ -126,6 +127,7 @@ include vendor/kylin/config/themes_common.mk
 # Required KM packages
 PRODUCT_PACKAGES += \
     Development \
+    LatinIME \
     BluetoothExt
 
 # Optional KM packages
@@ -134,10 +136,6 @@ PRODUCT_PACKAGES += \
     Basic \
     libemoji
 
-# Custom KM packages
-PRODUCT_PACKAGES += \
-    KylinModLauncher
-
 # KylinMod PhoneLoc Database
 PRODUCT_COPY_FILES +=  \
     vendor/kylin/prebuilt/common/media/kylin-phoneloc.dat:system/media/kylin-phoneloc.dat
@@ -145,12 +143,14 @@ PRODUCT_COPY_FILES +=  \
 # Custom KM packages
 PRODUCT_PACKAGES += \
     Launcher3 \
+    Trebuchet \
     DSPManager \
     libcyanogen-dsp \
     libscreenrecorder \
     audio_effects.conf \
     Apollo \
     CMFileManager \
+    CMHome \
     LockClock \
     KylinModScreenRecorder \
     KylinModSetupWizard
@@ -225,11 +225,10 @@ endif
 # easy way to extend to add more packages
 -include vendor/extra/product.mk
 
-PRODUCT_PACKAGE_OVERLAYS += vendor/kylin/overlay/dictionaries
 PRODUCT_PACKAGE_OVERLAYS += vendor/kylin/overlay/common
 
 PRODUCT_VERSION_MAJOR = KK4
-PRODUCT_VERSION_MINOR = 42
+PRODUCT_VERSION_MINOR = 44
 PRODUCT_VERSION_MAINTENANCE = 0
 
 # Set KM_BUILDTYPE from the env RELEASE_TYPE, for jenkins compat
@@ -304,16 +303,41 @@ else
     KMSTATS_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)$(PRODUCT_VERSION_MAINTENANCE)
 endif
 
-# by default, do not update the recovery with system updates
-PRODUCT_PROPERTY_OVERRIDES += persist.sys.recovery_update=false
-
 PRODUCT_PROPERTY_OVERRIDES += \
   ro.km.version=$(KM_VERSION) \
   ro.modversion=$(KM_VERSION) \
   ro.km.ui.name=KylinMod \
-  ro.km.ui.version=$(KMSTATS_VERSION)
+  ro.km.ui.version=$(KMSTATS_VERSION) \
+  ro.cmlegal.url=http://www.cyanogenmod.org/docs/privacy
 
 -include vendor/cm-priv/keys/keys.mk
+
+KM_DISPLAY_VERSION := $(KM_VERSION)
+
+ifneq ($(PRODUCT_DEFAULT_DEV_CERTIFICATE),)
+ifneq ($(PRODUCT_DEFAULT_DEV_CERTIFICATE),build/target/product/security/testkey)
+  ifneq ($(KM_BUILDTYPE), UNOFFICIAL)
+    ifndef TARGET_VENDOR_RELEASE_BUILD_ID
+      ifneq ($(KM_EXTRAVERSION),)
+        # Remove leading dash from KM_EXTRAVERSION
+        KM_EXTRAVERSION := $(shell echo $(KM_EXTRAVERSION) | sed 's/-//')
+        TARGET_VENDOR_RELEASE_BUILD_ID := $(KM_EXTRAVERSION)
+      else
+        TARGET_VENDOR_RELEASE_BUILD_ID := $(shell date -u +%Y%m%d)
+      endif
+    else
+      TARGET_VENDOR_RELEASE_BUILD_ID := $(TARGET_VENDOR_RELEASE_BUILD_ID)
+    endif
+    KM_DISPLAY_VERSION=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(TARGET_VENDOR_RELEASE_BUILD_ID)
+  endif
+endif
+endif
+
+# by default, do not update the recovery with system updates
+PRODUCT_PROPERTY_OVERRIDES += persist.sys.recovery_update=false
+
+PRODUCT_PROPERTY_OVERRIDES += \
+  ro.km.display.version=$(KM_DISPLAY_VERSION)
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
 
