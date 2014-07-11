@@ -79,6 +79,10 @@ PRODUCT_COPY_FILES += \
     vendor/kylin/prebuilt/common/bin/blacklist:system/addon.d/blacklist
 endif
 
+# Signature compatibility validation
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/common/bin/otasigcheck.sh:system/bin/otasigcheck.sh
+
 # init.d support
 PRODUCT_COPY_FILES += \
     vendor/kylin/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner \
@@ -308,6 +312,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
   ro.modversion=$(KM_VERSION) \
   ro.km.ui.name=KylinMod \
   ro.km.ui.version=$(KMSTATS_VERSION) \
+  ro.cm.version=$(CM_VERSION) \
+  ro.cm.releasetype=$(CM_BUILDTYPE) \
+  ro.modversion=$(CM_VERSION) \
   ro.cmlegal.url=http://www.cyanogenmod.org/docs/privacy
 
 -include vendor/cm-priv/keys/keys.mk
@@ -338,6 +345,12 @@ PRODUCT_PROPERTY_OVERRIDES += persist.sys.recovery_update=false
 
 PRODUCT_PROPERTY_OVERRIDES += \
   ro.km.display.version=$(KM_DISPLAY_VERSION)
+
+# disable multithreaded dextop for RELEASE and SNAPSHOT builds
+ifneq ($(filter RELEASE SNAPSHOT,$(CM_BUILDTYPE)),)
+PRODUCT_PROPERTY_OVERRIDES += \
+  persist.sys.dalvik.multithread=false
+endif
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
 
