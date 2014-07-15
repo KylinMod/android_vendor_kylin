@@ -81,7 +81,7 @@ endif
 
 # Signature compatibility validation
 PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/common/bin/otasigcheck.sh:system/bin/otasigcheck.sh
+    vendor/km/prebuilt/common/bin/otasigcheck.sh:system/bin/otasigcheck.sh
 
 # init.d support
 PRODUCT_COPY_FILES += \
@@ -312,9 +312,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
   ro.modversion=$(KM_VERSION) \
   ro.km.ui.name=KylinMod \
   ro.km.ui.version=$(KMSTATS_VERSION) \
-  ro.cm.version=$(CM_VERSION) \
-  ro.cm.releasetype=$(CM_BUILDTYPE) \
-  ro.modversion=$(CM_VERSION) \
+  ro.km.version=$(KM_VERSION) \
+  ro.km.releasetype=$(KM_BUILDTYPE) \
+  ro.modversion=$(KM_VERSION) \
   ro.cmlegal.url=http://www.cyanogenmod.org/docs/privacy
 
 -include vendor/cm-priv/keys/keys.mk
