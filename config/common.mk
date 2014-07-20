@@ -81,7 +81,7 @@ endif
 
 # Signature compatibility validation
 PRODUCT_COPY_FILES += \
-    vendor/km/prebuilt/common/bin/otasigcheck.sh:system/bin/otasigcheck.sh
+    vendor/kylin/prebuilt/common/bin/otasigcheck.sh:system/bin/otasigcheck.sh
 
 # init.d support
 PRODUCT_COPY_FILES += \
