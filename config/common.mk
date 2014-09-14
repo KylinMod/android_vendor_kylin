@@ -103,13 +103,9 @@ PRODUCT_COPY_FILES += \
 # KylinMod prebuilts
 PRODUCT_COPY_FILES += \
     vendor/kylin/prebuilt/common/app/Market.apk:system/app/Market.apk \
-    vendor/kylin/prebuilt/common/app/iFlyIME.apk:system/app/iFlyIME.apk \
+    vendor/kylin/prebuilt/common/app/SougouIME.apk:system/app/SougouIME.apk \
     vendor/kylin/prebuilt/common/app/Stats.apk:system/app/Stats.apk \
-    vendor/kylin/prebuilt/common/lib/libmsc-v7.so:system/lib/libmsc-v7.so \
-    vendor/kylin/prebuilt/common/lib/libsmartaiwrite-jni-v7.so:system/lib/libsmartaiwrite-jni-v7.so \
-    vendor/kylin/prebuilt/common/lib/libsmartaiwrite-jni-v8.so:system/lib/libsmartaiwrite-jni-v8.so \
-    vendor/kylin/prebuilt/common/lib/libsmartaiwrite-jni-v9.so:system/lib/libsmartaiwrite-jni-v9.so \
-    vendor/kylin/prebuilt/common/lib/libvadLib-v5.so:system/lib/libvadLib-v5.so
+    vendor/kylin/prebuilt/common/lib/libkpencore_v71.so:system/lib/libkpencore_v71.so
 
 # Bring in camera effects
 PRODUCT_COPY_FILES +=  \
